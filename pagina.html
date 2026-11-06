@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulce Cele | Pastelería y Heladería Artesanal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#F8BBD0',
+                            rose: '#F48FB1',
+                            darkRose: '#D81B60',
+                            cream: '#FFF8E7',
+                            brown: '#5D4037',
+                            lightBrown: '#8D6E63',
+                            chocolate: '#3E2723'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF9FA;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FCE4EC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F48FB1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-gray-800 pb-20 md:pb-0">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-brand-rose via-brand-darkRose to-brand-rose text-white text-sm font-medium py-2 px-4 text-center shadow-sm flex justify-between items-center">
+        <div class="flex-1 text-center">
+            <span>🛵 ¡Estamos Abiertos! Envíos a domicilio hasta las 00hs en Monte Grande y zonas cercanas 🍨</span>
+        </div>
+        <button onclick="toggleAdminModal()" class="text-xs bg-white text-brand-darkRose font-bold px-2.5 py-1 rounded-full shadow hover:bg-rose-100 transition flex items-center gap-1">
+            <i class="fa-solid fa-gear"></i> <span class="hidden sm:inline">Modo Admin / Precios</span>
+        </button>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-pink-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-pink-100 border-2 border-brand-rose flex items-center justify-center text-brand-darkRose text-2xl shadow-inner">
+                    🧁
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-brand-chocolate leading-none">Dulce Cele</h1>
+                    <p class="text-xs text-brand-darkRose font-semibold tracking-wider uppercase mt-0.5">Pastelería & Heladería Artesanal</p>
+                </div>
+            </div>
+
+            <!-- Nav Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-gray-700">
+                <a href="#catalogo" class="hover:text-brand-darkRose transition">Catálogo</a>
+                <a href="#arma-tu-pote" class="hover:text-brand-darkRose transition">Armá tu Pote</a>
+                <a href="#cotizador-torta" class="hover:text-brand-darkRose transition">Cotizá tu Torta</a>
+                <a href="#contacto" class="hover:text-brand-darkRose transition">Ubicación y Envíos</a>
+            </nav>
+
+            <!-- Cart Trigger Button -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleCartDrawer()" class="relative bg-brand-rose hover:bg-brand-darkRose text-white font-bold py-2.5 px-5 rounded-full shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-basket-shopping text-lg"></i>
+                    <span class="hidden sm:inline">Mi Pedido</span>
+                    <span id="cart-badge" class="bg-white text-brand-darkRose font-black text-xs w-6 h-6 rounded-full flex items-center justify-center border border-pink-200">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-b from-pink-100/50 via-white to-pink-50/30 py-12 lg:py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-12">
+            <div class="flex-1 text-center md:text-left space-y-6">
+                <div class="inline-flex items-center gap-2 bg-pink-100 text-brand-darkRose px-4 py-1.5 rounded-full text-sm font-semibold">
+                    <i class="fa-solid fa-location-dot"></i> Monte Grande • Mainer 352 (Barrio Federal)
+                </div>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-chocolate leading-tight">
+                    El sabor artesanal que te saca una <span class="text-brand-darkRose underline decoration-wavy decoration-pink-300">sonrisa</span>.
+                </h2>
+                <p class="text-gray-600 text-lg max-w-xl mx-auto md:mx-0">
+                    Helados 100% artesanales con las mejores salsas y pastelería personalizada para tus fechas más especiales. ¡Pedí ahora y recibilo en tu casa!
+                </p>
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+                    <a href="#arma-tu-pote" class="bg-brand-darkRose hover:bg-rose-700 text-white font-bold px-7 py-3.5 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+                        🍧 Armá tu Pote de Helado
+                    </a>
+                    <a href="#catalogo" class="bg-white border-2 border-brand-rose text-brand-darkRose hover:bg-pink-50 font-bold px-7 py-3.5 rounded-full shadow-sm transition">
+                        🍰 Ver Productos y Tartas
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image Cards Collage -->
+            <div class="flex-1 relative w-full max-w-md lg:max-w-none flex justify-center">
+                <div class="relative w-72 h-80 sm:w-80 sm:h-96 bg-pink-200 rounded-3xl rotate-3 shadow-xl overflow-hidden border-4 border-white">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80" alt="Helado Artesanal" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white">
+                        <p class="font-bold">Helados con Salsas Extra 🍫</p>
+                        <p class="text-xs text-pink-200">Dulce de leche, frutilla y crocantes</p>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -left-2 sm:left-4 w-56 h-64 bg-amber-100 rounded-3xl -rotate-6 shadow-2xl overflow-hidden border-4 border-white">
+                    <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=600&q=80" alt="Tortas Temáticas" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-3 text-white">
+                        <p class="font-bold text-sm">Tortas de Diseño 🎂</p>
+                        <p class="text-xs text-amber-200">BTS, Batman, Labubu y más</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Ice Cream Builder (Armá tu Pote) -->
+    <section id="arma-tu-pote" class="py-16 bg-white border-y border-pink-100">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="text-brand-darkRose font-semibold tracking-wider uppercase text-sm">Experiencia Personalizada</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-chocolate mt-1">🍨 Armá tu Pote de Helado Ideal</h2>
+                <p class="text-gray-600 mt-2">Elegí el tamaño, seleccioná tus gustos favoritos y agregale las salsas que quieras.</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-pink-50 to-white rounded-3xl p-6 sm:p-8 shadow-xl border border-pink-100 grid grid-cols-1 md:grid-cols-12 gap-8">
+                
+                <!-- Left: Size & Flavors Selection -->
+                <div class="md:col-span-7 space-y-6">
+                    <!-- Step 1: Size -->
+                    <div>
+                        <label class="block text-brand-chocolate font-bold text-lg mb-3">1. Elegí el Tamaño del Pote:</label>
+                        <div class="grid grid-cols-3 gap-3" id="size-options">
+                            <button onclick="selectPoteSize(0.25, 2500, 2)" class="pote-size-btn border-2 border-brand-rose bg-white p-3 rounded-2xl text-center hover:border-brand-darkRose transition focus:outline-none" data-size="0.25">
+                                <div class="text-2xl">🍧</div>
+                                <div class="font-bold text-brand-chocolate">1/4 Kg</div>
+                                <div class="text-xs text-gray-500">Hasta 2 gustos</div>
+                                <div class="text-sm font-black text-brand-darkRose mt-1" id="price-0.25">$2.500</div>
+                            </button>
+                            <button onclick="selectPoteSize(0.5, 4800, 3)" class="pote-size-btn border-2 border-gray-200 bg-white p-3 rounded-2xl text-center hover:border-brand-darkRose transition focus:outline-none" data-size="0.5">
+                                <div class="text-2xl">🍨</div>
+                                <div class="font-bold text-brand-chocolate">1/2 Kg</div>
+                                <div class="text-xs text-gray-500">Hasta 3 gustos</div>
+                                <div class="text-sm font-black text-brand-darkRose mt-1" id="price-0.5">$4.800</div>
+                            </button>
+                            <button onclick="selectPoteSize(1, 8500, 4)" class="pote-size-btn border-2 border-gray-200 bg-white p-3 rounded-2xl text-center hover:border-brand-darkRose transition focus:outline-none" data-size="1">
+                                <div class="text-2xl">🪣</div>
+                                <div class="font-bold text-brand-chocolate">1 Kg</div>
+                                <div class="text-xs text-gray-500">Hasta 4 gustos</div>
+                                <div class="text-sm font-black text-brand-darkRose mt-1" id="price-1">$8.500</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Flavor Choices -->
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <label class="text-brand-chocolate font-bold text-lg">2. Seleccioná los Gustos:</label>
+                            <span class="text-xs font-semibold text-brand-darkRose bg-pink-100 px-2.5 py-1 rounded-full" id="flavor-counter">0 / 2 Seleccionados</span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-56 overflow-y-auto pr-1" id="flavors-grid">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Toppings & Sauces -->
+                    <div>
+                        <label class="block text-brand-chocolate font-bold text-lg mb-2">3. Salsas y Toppings Extra:</label>
+                        <div class="flex flex-wrap gap-2" id="toppings-container">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Summary Card -->
+                <div class="md:col-span-5 flex flex-col justify-between bg-white rounded-2xl p-6 border border-pink-200 shadow-sm">
+                    <div>
+                        <div class="border-b border-pink-100 pb-4 mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Resumen del Pote</span>
+                            <h3 class="text-2xl font-bold text-brand-chocolate" id="summary-size-title">Pote de 1/4 Kg</h3>
+                            <p class="text-2xl font-black text-brand-darkRose mt-1" id="summary-price">$2.500</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-xs font-bold text-gray-500 uppercase">Gustos Elegidos:</h4>
+                                <ul id="summary-flavors-list" class="text-sm text-gray-700 mt-1 space-y-1 font-medium">
+                                    <li class="text-gray-400 italic">Ningún gusto seleccionado aún</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xs font-bold text-gray-500 uppercase">Salsas & Extras:</h4>
+                                <ul id="summary-toppings-list" class="text-sm text-gray-700 mt-1 space-y-1">
+                                    <li class="text-gray-400 italic">Sin extras</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-pink-100">
+                        <button onclick="addCustomPoteToCart()" class="w-full bg-brand-darkRose hover:bg-rose-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Agregar Pote al Pedido
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Products Catalog -->
+    <section id="catalogo" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+                <span class="text-brand-darkRose font-semibold tracking-wider uppercase text-sm">Nuestro Menú Dulce</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-chocolate mt-1">Pastelería, Especiales & Helados</h2>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap gap-2" id="category-tabs">
+                <button onclick="filterCategory('todos')" class="cat-btn bg-brand-chocolate text-white font-semibold text-sm px-4 py-2 rounded-full transition" data-cat="todos">Todos</button>
+                <button onclick="filterCategory('especiales')" class="cat-btn bg-white border border-pink-200 text-gray-700 hover:bg-pink-50 font-semibold text-sm px-4 py-2 rounded-full transition" data-cat="especiales">🐰 Especiales (Pascua/Fechas)</button>
+                <button onclick="filterCategory('tortas')" class="cat-btn bg-white border border-pink-200 text-gray-700 hover:bg-pink-50 font-semibold text-sm px-4 py-2 rounded-full transition" data-cat="tortas">🎂 Tortas & Tartas</button>
+                <button onclick="filterCategory('dulces')" class="cat-btn bg-white border border-pink-200 text-gray-700 hover:bg-pink-50 font-semibold text-sm px-4 py-2 rounded-full transition" data-cat="dulces">🧁 Alfajores & Pop Cakes</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid">
+            <!-- Products rendering via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Cake Quotation Tool (Cotizador de Tortas Temáticas) -->
+    <section id="cotizador-torta" class="py-16 bg-gradient-to-r from-pink-100 via-rose-50 to-pink-100">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-pink-200 text-center">
+                <span class="bg-pink-100 text-brand-darkRose text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">Personalización Completa</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-chocolate mt-3">🎨 Presupuestá tu Torta Temática</h2>
+                <p class="text-gray-600 mt-2 max-w-xl mx-auto">Hacemos tortas artesanales de Batman, BTS, Among Us, Dragon Ball Z, Labubu y mucho más.</p>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <div>
+                        <label class="block text-sm font-bold text-brand-chocolate mb-2">Porciones Aprox:</label>
+                        <select id="cake-portions" onchange="calculateCakeQuote()" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-medium focus:ring-2 focus:ring-brand-rose outline-none">
+                            <option value="10">Chica (8 - 10 porciones)</option>
+                            <option value="15" selected>Mediana (12 - 15 porciones)</option>
+                            <option value="25">Grande (20 - 25 porciones)</option>
+                            <option value="35">Evento (30 - 35 porciones)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-brand-chocolate mb-2">Sabor / Relleno Principal:</label>
+                        <select id="cake-filling" onchange="calculateCakeQuote()" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-medium focus:ring-2 focus:ring-brand-rose outline-none">
+                            <option value="0">Dulce de leche con Chips de Chocolate</option>
+                            <option value="1500">Crema Chantilly con Frutillas</option>
+                            <option value="2000">Mousse de Chocolate & Nutella</option>
+                            <option value="1000">Crema Bariloche & Merenguitos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-brand-chocolate mb-2">Estilo de Decoración:</label>
+                        <select id="cake-style" onchange="calculateCakeQuote()" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-medium focus:ring-2 focus:ring-brand-rose outline-none">
+                            <option value="3000">Temática Infantil / Dibujos (Toppers)</option>
+                            <option value="5000">Modelado en Azúcar / 3D Especial</option>
+                            <option value="2000">Golosinas y Drip Cake</option>
+                            <option value="1500">Flores en Crema / Elegante</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Result Box -->
+                <div class="mt-8 bg-pink-50 rounded-2xl p-6 border border-pink-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left">
+                        <span class="text-xs font-bold text-gray-500 uppercase">Estimación Aproximada:</span>
+                        <div class="text-3xl font-black text-brand-darkRose" id="cake-quote-price">$18.500</div>
+                        <p class="text-xs text-gray-500 mt-1">*El precio final se confirma al enviar tu idea de diseño por WhatsApp.</p>
+                    </div>
+                    <button onclick="orderCustomCakeWhatsApp()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Consultar este Diseño
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Delivery Zone Calculator -->
+    <section id="contacto" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-6 space-y-6">
+                <span class="text-brand-darkRose font-semibold tracking-wider uppercase text-sm">Envíos y Retiros</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-chocolate">¿Dónde estamos y cómo pedir?</h2>
+                <p class="text-gray-600">
+                    Podés pasar a retirar tu pedido por nuestro local o te lo enviamos en moto/auto para que te llegue helado y perfecto a la puerta de tu casa.
+                </p>
+
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-pink-50/60 border border-pink-100">
+                        <div class="w-10 h-10 rounded-full bg-brand-rose text-white flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-chocolate">Dirección del Local:</h4>
+                            <p class="text-gray-600 text-sm">Mainer 352, Barrio Federal, Monte Grande, Buenos Aires.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-pink-50/60 border border-pink-100">
+                        <div class="w-10 h-10 rounded-full bg-brand-rose text-white flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-chocolate">Horario de Atención:</h4>
+                            <p class="text-gray-600 text-sm">Todos los días de 14:00 hs a 00:00 hs (Envíos hasta las 00hs).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Zone Calculator Widget -->
+                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5 mt-6">
+                    <h4 class="font-bold text-brand-chocolate text-sm mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-motorcycle text-brand-darkRose"></i> Calcule el costo de envío a tu zona:
+                    </h4>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <select id="shipping-zone-select" onchange="calculateShippingCost()" class="flex-1 bg-white border border-gray-300 rounded-xl p-2.5 text-sm font-medium outline-none focus:border-brand-rose">
+                            <option value="0">Retiro por local (Mainer 352) - $0</option>
+                            <option value="800" selected>Monte Grande Centro - $800</option>
+                            <option value="1200">Barrio Federal / Alrededores - $1.200</option>
+                            <option value="1500">Luis Guillón - $1.500</option>
+                            <option value="1800">Canning - $1.800</option>
+                            <option value="2000">El Jagüel - $2.000</option>
+                        </select>
+                        <div class="bg-white border border-pink-200 px-4 py-2.5 rounded-xl font-bold text-brand-darkRose text-center text-sm flex items-center justify-center" id="shipping-cost-display">
+                            Envío: $800
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Instagram Callout -->
+            <div class="lg:col-span-6 bg-gradient-to-br from-pink-200 to-rose-300 rounded-3xl p-8 text-center text-white relative overflow-hidden shadow-xl">
+                <div class="relative z-10 space-y-6">
+                    <div class="w-20 h-20 bg-white text-brand-darkRose rounded-full mx-auto flex items-center justify-center text-3xl shadow-lg">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold">@dulce_cele05</h3>
+                    <p class="text-pink-100 max-w-md mx-auto text-sm">
+                        ¡Seguinos en Instagram para enterarte de los nuevos sabores de helado, sorteos y creaciones semanales!
+                    </p>
+                    <a href="https://www.instagram.com/dulce_cele05/" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-brand-darkRose font-bold px-8 py-3 rounded-full shadow-md hover:bg-pink-50 transition">
+                        Ver publicaciones de Instagram
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-chocolate text-pink-100 py-10 border-t border-amber-900">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+            <div class="text-2xl font-bold text-white flex items-center justify-center gap-2">
+                🧁 Dulce Cele
+            </div>
+            <p class="text-xs text-pink-200/80">Pastelería y Heladería Artesanal • Envíos a domicilio en Monte Grande</p>
+            <div class="pt-2">
+                <a href="https://www.instagram.com/dulce_cele05/" target="_blank" rel="noopener noreferrer" class="text-pink-200 hover:text-white text-sm font-semibold inline-flex items-center gap-1.5 transition">
+                    <i class="fa-brands fa-instagram text-lg"></i> @dulce_cele05
+                </a>
+            </div>
+            <p class="text-xs text-pink-300/60 pt-4 border-t border-amber-900/50">© 2026 Dulce Cele. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- CART SIDE DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        
+        <!-- Panel -->
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto transform transition-transform duration-300 translate-x-full" id="cart-panel">
+            <div class="p-5 bg-pink-50 border-b border-pink-100 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-basket-shopping text-brand-darkRose text-xl"></i>
+                    <h3 class="text-xl font-bold text-brand-chocolate">Tu Pedido</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-gray-600 p-2 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items Scroll -->
+            <div class="flex-1 overflow-y-auto p-5 space-y-4" id="cart-items-container">
+                <!-- Injected JS -->
+            </div>
+
+            <!-- Cart Footer Summary -->
+            <div class="p-5 bg-gray-50 border-t border-gray-200 space-y-3">
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>Subtotal Productos:</span>
+                    <span class="font-semibold" id="cart-subtotal">$0</span>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>Costo de Envío:</span>
+                    <span id="cart-shipping">$800</span>
+                </div>
+                <div class="flex justify-between text-lg font-black text-brand-chocolate border-t border-gray-200 pt-2">
+                    <span>TOTAL:</span>
+                    <span class="text-brand-darkRose" id="cart-total">$800</span>
+                </div>
+
+                <button onclick="sendOrderWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 mt-4 text-base">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Enviar Pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN EDIT MODAL (Gestión de Precios y Productos) -->
+    <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl border border-pink-200">
+            <div class="p-5 bg-brand-chocolate text-white flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-brand-rose"></i>
+                    <h3 class="text-xl font-bold">Panel Admin - Modificar Precios & Productos</h3>
+                </div>
+                <button onclick="toggleAdminModal()" class="text-gray-300 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 flex-1">
+                
+                <!-- Notice -->
+                <div class="bg-amber-50 border border-amber-200 text-amber-800 text-xs p-3.5 rounded-xl flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-base"></i>
+                    <span>Los cambios de precios y stock que realices acá se guardan automáticamente en tu navegador.</span>
+                </div>
+
+                <!-- Add New Product Form -->
+                <div class="bg-pink-50/50 p-4 rounded-2xl border border-pink-100 space-y-3">
+                    <h4 class="font-bold text-brand-chocolate text-sm uppercase">➕ Agregar Nuevo Producto</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <input type="text" id="new-prod-name" placeholder="Nombre (Ej: Huevo Labubu)" class="p-2.5 border rounded-xl outline-none">
+                        <input type="number" id="new-prod-price" placeholder="Precio ($)" class="p-2.5 border rounded-xl outline-none">
+                        <select id="new-prod-cat" class="p-2.5 border rounded-xl outline-none">
+                            <option value="especiales">🐰 Especiales (Pascua)</option>
+                            <option value="tortas">🎂 Tortas & Tartas</option>
+                            <option value="dulces">🧁 Alfajores & Pop Cakes</option>
+                        </select>
+                        <input type="text" id="new-prod-img" placeholder="URL Imagen (Opcional)" class="p-2.5 border rounded-xl outline-none">
+                    </div>
+                    <button onclick="addNewProduct()" class="w-full bg-brand-darkRose text-white font-bold py-2 rounded-xl text-sm hover:bg-rose-700 transition">
+                        Guardar Nuevo Producto
+                    </button>
+                </div>
+
+                <!-- Edit Existing Products List -->
+                <div>
+                    <h4 class="font-bold text-brand-chocolate text-sm uppercase mb-3">✏️ Modificar Precios Existentes</h4>
+                    <div class="space-y-3" id="admin-products-list">
+                        <!-- Injected JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 bg-gray-50 border-t border-gray-200 text-right">
+                <button onclick="resetDefaultProducts()" class="text-xs text-rose-600 underline font-medium mr-4">Restablecer Productos Iniciales</button>
+                <button onclick="toggleAdminModal()" class="bg-gray-700 text-white font-bold px-5 py-2 rounded-xl text-sm">Cerrar Panel</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Initial Products Database (From Instagram Real Media Info)
+        const DEFAULT_PRODUCTS = [
+            {
+                id: 'h-labubu',
+                name: 'Huevo de Pascua Labubu Chocolate',
+                category: 'especiales',
+                price: 13000,
+                desc: 'Diseño exclusivo en chocolate blanco/con leche modelado.',
+                image: 'https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=500&q=80',
+                available: true
+            },
+            {
+                id: 'h-capibara',
+                name: 'Huevo de Pascua Capibara con Corazón',
+                category: 'especiales',
+                price: 12500,
+                desc: 'Edición especial de capibara artesanal.',
+                image: 'https://images.unsplash.com/photo-1548848221-0c2e497ed557?auto=format&fit=crop&w=500&q=80',
+                available: true
+            },
+            {
+                id: 't-batman',
+                name: 'Torta Personalizada Batman Drip',
+                category: 'tortas',
+                price: 22000,
+                desc: 'Decoración temática Batman con cobertura buttercream y chocolate.',
+                image: 'https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=500&q=80',
+                available: true
+            },
+            {
+                id: 't-bts',
+                name: 'Torta BTS K-Pop Edition',
+                category: 'tortas',
+                price: 24000,
+                desc: 'Diseño personalizado para fans de BTS con toppings rosas y chocolate.',
+                image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=80',
+                available: true
+            },
+            {
+                id: 't-manzana',
+                name: 'Tarta Artesanal de Manzana & Canela',
+                category: 'tortas',
+                price: 9500,
+                desc: 'Masa sableé suave con finas rodajas de manzana y brillo de albaricoque.',
+                image: 'https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?auto=format&fit=crop&w=500&q=80',
+                available: true
+            },
+            {
+                id: 't-frutilla',
+                name: 'Tarta Frutal de Frutillas con Crema',
+                category: 'tortas',
+                price: 11000,
+                desc: 'Abundantes frutillas frescas con crema pastelera o chantilly.',
+                image: 'https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?auto=format&fit=crop&w=500&q=80',
+                available: true
+            },
+            {
+                id: 'a-maicena',
+                name: 'Docena Alfajores de Maicena Caseros',
+                category: 'dulces',
+                price: 7800,
+                desc: 'Mega rellenos de dulce de leche con coco rallado.',
+                image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=500&q=80',
+                available: true
+            },
+            {
+                id: 'p-pops',
+                name: 'Paletas Heladas / Ice Pops Decoradas (x6)',
+                category: 'dulces',
+                price: 6500,
+                desc: 'Paletas bañadas en chocolate cobertura de colores pastel.',
+                image: 'https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=500&q=80',
+                available: true
+            }
+        ];
+
+        // Ice cream available flavors
+        const ICE_CREAM_FLAVORS = [
+            'Dulce de Leche Granizado', 'Chocolate Suizo', 'Tramontana',
+            'Frutilla a la Crema', 'Menta Granizada', 'Sambayón',
+            'Banana Split', 'Crema Americana', 'Chocolate Marroc'
+        ];
+
+        // Available Toppings / Sauces
+        const TOPPINGS_LIST = [
+            { name: 'Salsa de Frutilla 🍓', price: 0 },
+            { name: 'Salsa de Dulce de Leche 🍯', price: 0 },
+            { name: 'Baño de Chocolate Crocante 🍫', price: 500 },
+            { name: 'Chips de Chocolate 🍪', price: 300 }
+        ];
+
+        // App State
+        let products = [];
+        let cart = [];
+        let selectedCategory = 'todos';
+
+        // Pote Builder State
+        let poteState = {
+            size: 0.25,
+            price: 2500,
+            maxFlavors: 2,
+            selectedFlavors: [],
+            selectedToppings: []
+        };
+
+        // Initialize App
+        window.onload = function() {
+            loadProductsFromStorage();
+            renderProducts();
+            initPoteBuilder();
+            calculateCakeQuote();
+            updateCartUI();
+        };
+
+        // Load Products with localStorage persistence
+        function loadProductsFromStorage() {
+            const saved = localStorage.getItem('dulce_cele_products');
+            if (saved) {
+                try {
+                    products = JSON.parse(saved);
+                } catch(e) {
+                    products = [...DEFAULT_PRODUCTS];
+                }
+            } else {
+                products = [...DEFAULT_PRODUCTS];
+            }
+        }
+
+        function saveProductsToStorage() {
+            localStorage.setItem('dulce_cele_products', JSON.stringify(products));
+        }
+
+        // Render Catalog Products
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const filtered = selectedCategory === 'todos' 
+                ? products 
+                : products.filter(p => p.category === selectedCategory);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-2xl overflow-hidden border border-pink-100 shadow-md hover:shadow-xl transition flex flex-col justify-between ${!p.available ? 'opacity-60' : ''}`;
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-48 w-full overflow-hidden bg-pink-50">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transform hover:scale-105 transition duration-500">
+                            ${!p.available ? '<span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">Agotado</span>' : ''}
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg text-brand-chocolate">${p.name}</h3>
+                            <p class="text-xs text-gray-500 mt-1 line-clamp-2">${p.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between mt-auto">
+                        <span class="text-xl font-black text-brand-darkRose">$${p.price.toLocaleString()}</span>
+                        <button onclick="addToCart('${p.id}')" ${!p.available ? 'disabled' : ''} class="bg-pink-100 hover:bg-brand-rose text-brand-darkRose hover:text-white font-bold p-2.5 rounded-xl transition flex items-center justify-center">
+                            <i class="fa-solid fa-cart-plus text-base"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat) {
+            selectedCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = "cat-btn bg-brand-chocolate text-white font-semibold text-sm px-4 py-2 rounded-full transition";
+                } else {
+                    btn.className = "cat-btn bg-white border border-pink-200 text-gray-700 hover:bg-pink-50 font-semibold text-sm px-4 py-2 rounded-full transition";
+                }
+            });
+            renderProducts();
+        }
+
+        // --- POTE BUILDER LOGIC ---
+        function initPoteBuilder() {
+            // Render Flavors
+            const flavorsGrid = document.getElementById('flavors-grid');
+            flavorsGrid.innerHTML = '';
+            ICE_CREAM_FLAVORS.forEach(flavor => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'flavor-btn text-xs font-semibold p-2.5 rounded-xl border border-pink-200 bg-white text-gray-700 hover:border-brand-rose transition text-left flex justify-between items-center';
+                btn.onclick = () => toggleFlavor(flavor, btn);
+                btn.innerHTML = `<span>${flavor}</span> <i class="fa-solid fa-plus text-gray-400 text-xs icon-check"></i>`;
+                btn.dataset.flavor = flavor;
+                flavorsGrid.appendChild(btn);
+            });
+
+            // Render Toppings
+            const toppingsContainer = document.getElementById('toppings-container');
+            toppingsContainer.innerHTML = '';
+            TOPPINGS_LIST.forEach((top, idx) => {
+                const label = document.createElement('button');
+                label.type = 'button';
+                label.className = 'topping-btn text-xs font-medium px-3 py-1.5 rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-pink-50 transition';
+                label.onclick = () => toggleTopping(top, label);
+                label.innerText = `${top.name} ${top.price > 0 ? '(+$' + top.price + ')' : '(Gratis)'}`;
+                toppingsContainer.appendChild(label);
+            });
+
+            updatePoteSummaryUI();
+        }
+
+        function selectPoteSize(size, price, maxFlavors) {
+            poteState.size = size;
+            poteState.price = price;
+            poteState.maxFlavors = maxFlavors;
+            
+            // Trim extra flavors if changing size down
+            if (poteState.selectedFlavors.length > maxFlavors) {
+                poteState.selectedFlavors = poteState.selectedFlavors.slice(0, maxFlavors);
+                syncFlavorButtonsUI();
+            }
+
+            // UI styling
+            document.querySelectorAll('.pote-size-btn').forEach(btn => {
+                if (parseFloat(btn.dataset.size) === size) {
+                    btn.classList.add('border-brand-rose', 'bg-pink-50/50');
+                    btn.classList.remove('border-gray-200');
+                } else {
+                    btn.classList.remove('border-brand-rose', 'bg-pink-50/50');
+                    btn.classList.add('border-gray-200');
+                }
+            });
+
+            updatePoteSummaryUI();
+        }
+
+        function toggleFlavor(flavor, btn) {
+            const index = poteState.selectedFlavors.indexOf(flavor);
+            if (index > -1) {
+                poteState.selectedFlavors.splice(index, 1);
+            } else {
+                if (poteState.selectedFlavors.length < poteState.maxFlavors) {
+                    poteState.selectedFlavors.push(flavor);
+                } else {
+                    alert(`El pote de ${poteState.size}Kg permite hasta ${poteState.maxFlavors} gustos.`);
+                    return;
+                }
+            }
+            syncFlavorButtonsUI();
+            updatePoteSummaryUI();
+        }
+
+        function syncFlavorButtonsUI() {
+            document.querySelectorAll('.flavor-btn').forEach(btn => {
+                const flavor = btn.dataset.flavor;
+                const icon = btn.querySelector('.icon-check');
+                if (poteState.selectedFlavors.includes(flavor)) {
+                    btn.classList.add('bg-pink-100', 'border-brand-darkRose', 'text-brand-darkRose');
+                    icon.className = 'fa-solid fa-check text-brand-darkRose text-xs icon-check';
+                } else {
+                    btn.classList.remove('bg-pink-100', 'border-brand-darkRose', 'text-brand-darkRose');
+                    icon.className = 'fa-solid fa-plus text-gray-400 text-xs icon-check';
+                }
+            });
+        }
+
+        function toggleTopping(toppingObj, btn) {
+            const idx = poteState.selectedToppings.findIndex(t => t.name === toppingObj.name);
+            if (idx > -1) {
+                poteState.selectedToppings.splice(idx, 1);
+                btn.classList.remove('bg-brand-darkRose', 'text-white');
+            } else {
+                poteState.selectedToppings.push(toppingObj);
+                btn.classList.add('bg-brand-darkRose', 'text-white');
+            }
+            updatePoteSummaryUI();
+        }
+
+        function updatePoteSummaryUI() {
+            document.getElementById('flavor-counter').innerText = `${poteState.selectedFlavors.length} / ${poteState.maxFlavors} Seleccionados`;
+            document.getElementById('summary-size-title').innerText = `Pote de ${poteState.size} Kg`;
+            
+            // Calculate total pote price with toppings
+            let extraPrice = poteState.selectedToppings.reduce((acc, curr) => acc + curr.price, 0);
+            let totalPrice = poteState.price + extraPrice;
+            document.getElementById('summary-price').innerText = `$${totalPrice.toLocaleString()}`;
+
+            // Flavors List
+            const flavorsList = document.getElementById('summary-flavors-list');
+            if (poteState.selectedFlavors.length === 0) {
+                flavorsList.innerHTML = '<li class="text-gray-400 italic">Ningún gusto seleccionado aún</li>';
+            } else {
+                flavorsList.innerHTML = poteState.selectedFlavors.map(f => `<li>• ${f}</li>`).join('');
+            }
+
+            // Toppings List
+            const toppingsList = document.getElementById('summary-toppings-list');
+            if (poteState.selectedToppings.length === 0) {
+                toppingsList.innerHTML = '<li class="text-gray-400 italic">Sin extras</li>';
+            } else {
+                toppingsList.innerHTML = poteState.selectedToppings.map(t => `<li>• ${t.name}</li>`).join('');
+            }
+        }
+
+        function addCustomPoteToCart() {
+            if (poteState.selectedFlavors.length === 0) {
+                alert('Por favor elegí al menos 1 gusto para tu helado.');
+                return;
+            }
+
+            let extraPrice = poteState.selectedToppings.reduce((acc, curr) => acc + curr.price, 0);
+            let totalPrice = poteState.price + extraPrice;
+
+            const item = {
+                id: 'pote-custom-' + Date.now(),
+                name: `Pote de Helado ${poteState.size}Kg`,
+                price: totalPrice,
+                desc: `Gustos: ${poteState.selectedFlavors.join(', ')}. Extras: ${poteState.selectedToppings.map(t=>t.name).join(', ') || 'Ninguno'}`,
+                qty: 1
+            };
+
+            cart.push(item);
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        // --- CAKE QUOTATION ---
+        function calculateCakeQuote() {
+            const portions = parseInt(document.getElementById('cake-portions').value);
+            const fillingPrice = parseInt(document.getElementById('cake-filling').value);
+            const stylePrice = parseInt(document.getElementById('cake-style').value);
+
+            let basePrice = portions * 900; // $900 per portion base
+            let total = basePrice + fillingPrice + stylePrice;
+
+            document.getElementById('cake-quote-price').innerText = `$${total.toLocaleString()}`;
+        }
+
+        function orderCustomCakeWhatsApp() {
+            const portionsText = document.getElementById('cake-portions').options[document.getElementById('cake-portions').selectedIndex].text;
+            const fillingText = document.getElementById('cake-filling').options[document.getElementById('cake-filling').selectedIndex].text;
+            const styleText = document.getElementById('cake-style').options[document.getElementById('cake-style').selectedIndex].text;
+            const estimatedPrice = document.getElementById('cake-quote-price').innerText;
+
+            const msg = `Hola Dulce Cele! 🍰 Quiero consultar para encargar una Torta Personalizada:\n\n- *Porciones:* ${portionsText}\n- *Relleno:* ${fillingText}\n- *Estilo:* ${styleText}\n- *Presupuesto Estimado:* ${estimatedPrice}\n\n¿Tienen disponibilidad de fecha? ¡Gracias!`;
+            
+            window.open(`https://wa.me/541162322012?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // --- CART SYSTEM ---
+        function addToCart(productId) {
+            const prod = products.find(p => p.id === productId);
+            if (!prod) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    id: prod.id,
+                    name: prod.name,
+                    price: prod.price,
+                    desc: prod.desc,
+                    qty: 1
+                });
+            }
+            updateCartUI();
+        }
+
+        function updateCartQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function calculateShippingCost() {
+            const cost = parseInt(document.getElementById('shipping-zone-select').value);
+            document.getElementById('shipping-cost-display').innerText = `Envío: $${cost.toLocaleString()}`;
+            document.getElementById('cart-shipping').innerText = `$${cost.toLocaleString()}`;
+            updateCartTotalsOnly();
+        }
+
+        function updateCartTotalsOnly() {
+            const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+            const shippingCost = parseInt(document.getElementById('shipping-zone-select').value) || 0;
+            const total = subtotal + shippingCost;
+
+            document.getElementById('cart-subtotal').innerText = `$${subtotal.toLocaleString()}`;
+            document.getElementById('cart-total').innerText = `$${total.toLocaleString()}`;
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            let totalCount = 0;
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-ice-cream text-5xl mb-3 text-pink-200"></i>
+                        <p class="font-medium">Tu carrito está vacío</p>
+                        <p class="text-xs">¡Elegí algo rico para sumar!</p>
+                    </div>
+                `;
+            } else {
+                cart.forEach((item, idx) => {
+                    totalCount += item.qty;
+                    subtotal += (item.price * item.qty);
+
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex items-center justify-between p-3.5 bg-pink-50/60 rounded-xl border border-pink-100';
+                    cartItem.innerHTML = `
+                        <div class="flex-1 pr-2">
+                            <h4 class="font-bold text-sm text-brand-chocolate">${item.name}</h4>
+                            <p class="text-xs text-gray-500">${item.desc}</p>
+                            <span class="text-xs font-black text-brand-darkRose mt-1 block">$${(item.price * item.qty).toLocaleString()}</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white rounded-lg border border-pink-200 p-1">
+                            <button onclick="updateCartQty(${idx}, -1)" class="w-6 h-6 rounded bg-gray-100 hover:bg-pink-100 text-gray-600 font-bold text-xs">-</button>
+                            <span class="text-xs font-bold px-1">${item.qty}</span>
+                            <button onclick="updateCartQty(${idx}, 1)" class="w-6 h-6 rounded bg-gray-100 hover:bg-pink-100 text-gray-600 font-bold text-xs">+</button>
+                        </div>
+                    `;
+                    container.appendChild(cartItem);
+                });
+            }
+
+            document.getElementById('cart-badge').innerText = totalCount;
+            updateCartTotalsOnly();
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            const panel = document.getElementById('cart-panel');
+            
+            if (drawer.classList.contains('opacity-0')) {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                panel.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('opacity-0', 'pointer-events-none');
+                panel.classList.add('translate-x-full');
+            }
+        }
+
+        function sendOrderWhatsApp() {
+            if (cart.length === 0) {
+                alert('Agregá al menos un producto al carrito para realizar el pedido.');
+                return;
+            }
+
+            const zoneSelect = document.getElementById('shipping-zone-select');
+            const zoneText = zoneSelect.options[zoneSelect.selectedIndex].text;
+            const shippingCost = parseInt(zoneSelect.value);
+
+            let msg = `🛍️ *NUEVO PEDIDO - DULCE CELE*\n\n`;
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                subtotal += itemTotal;
+                msg += `• *${item.qty}x ${item.name}* ($${itemTotal.toLocaleString()})\n  _${item.desc}_\n\n`;
+            });
+
+            msg += `-------------------------------\n`;
+            msg += `💵 *Subtotal:* $${subtotal.toLocaleString()}\n`;
+            msg += `🛵 *Método / Zona:* ${zoneText}\n`;
+            msg += `💰 *TOTAL A PAGAR:* $${(subtotal + shippingCost).toLocaleString()}\n\n`;
+            msg += `📍 *Ubicación del local:* Mainer 352, Barrio Federal, Monte Grande.\n`;
+            msg += `¡Espero la confirmación de mi pedido!`;
+
+            window.open(`https://wa.me/541162322012?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // --- ADMIN PANEL FUNCTIONS ---
+        function toggleAdminModal() {
+            const modal = document.getElementById('admin-modal');
+            if (modal.classList.contains('hidden')) {
+                renderAdminProductsList();
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function renderAdminProductsList() {
+            const container = document.getElementById('admin-products-list');
+            container.innerHTML = '';
+
+            products.forEach((p, idx) => {
+                const item = document.createElement('div');
+                item.className = 'flex flex-col sm:flex-row items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200 gap-3';
+                item.innerHTML = `
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover">
+                        <div>
+                            <div class="font-bold text-xs text-brand-chocolate">${p.name}</div>
+                            <div class="text-[10px] text-gray-500">${p.category}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                        <span class="text-xs font-bold text-gray-500">$</span>
+                        <input type="number" value="${p.price}" onchange="updateProductPrice(${idx}, this.value)" class="w-24 p-1.5 border rounded-lg text-xs font-bold text-brand-darkRose">
+                        <button onclick="toggleProductAvailability(${idx})" class="px-2 py-1 rounded text-xs font-bold ${p.available ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}">
+                            ${p.available ? 'En Stock' : 'Agotado'}
+                        </button>
+                        <button onclick="deleteProduct(${idx})" class="text-red-500 hover:text-red-700 p-1">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function updateProductPrice(index, newPrice) {
+            products[index].price = parseFloat(newPrice) || 0;
+            saveProductsToStorage();
+            renderProducts();
+        }
+
+        function toggleProductAvailability(index) {
+            products[index].available = !products[index].available;
+            saveProductsToStorage();
+            renderProducts();
+            renderAdminProductsList();
+        }
+
+        function deleteProduct(index) {
+            if (confirm(`¿Eliminar ${products[index].name}?`)) {
+                products.splice(index, 1);
+                saveProductsToStorage();
+                renderProducts();
+                renderAdminProductsList();
+            }
+        }
+
+        function addNewProduct() {
+            const name = document.getElementById('new-prod-name').value.trim();
+            const price = parseFloat(document.getElementById('new-prod-price').value);
+            const category = document.getElementById('new-prod-cat').value;
+            let image = document.getElementById('new-prod-img').value.trim();
+
+            if (!name || isNaN(price)) {
+                alert('Por favor ingresá un nombre y un precio válido.');
+                return;
+            }
+
+            if (!image) {
+                image = 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=80';
+            }
+
+            const newProd = {
+                id: 'prod-' + Date.now(),
+                name,
+                category,
+                price,
+                desc: 'Producto nuevo creado desde Panel Admin',
+                image,
+                available: true
+            };
+
+            products.push(newProd);
+            saveProductsToStorage();
+            renderProducts();
+            renderAdminProductsList();
+
+            // Clear Form
+            document.getElementById('new-prod-name').value = '';
+            document.getElementById('new-prod-price').value = '';
+            document.getElementById('new-prod-img').value = '';
+            alert('¡Producto agregado con éxito!');
+        }
+
+        function resetDefaultProducts() {
+            if (confirm('¿Restablecer el catálogo con los precios e items iniciales?')) {
+                products = [...DEFAULT_PRODUCTS];
+                saveProductsToStorage();
+                renderProducts();
+                renderAdminProductsList();
+            }
+        }
+    </script>
+</body>
+</html>
