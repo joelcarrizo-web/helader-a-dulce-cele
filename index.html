@@ -60,7 +60,8 @@
         <div class="flex-1 text-center">
             <span>🛵 ¡Estamos Abiertos! Envíos a domicilio hasta las 00hs en Monte Grande y zonas cercanas 🍨</span>
         </div>
-        <button onclick="toggleAdminModal()" class="text-xs bg-white text-brand-darkRose font-bold px-2.5 py-1 rounded-full shadow hover:bg-rose-100 transition flex items-center gap-1">
+        <!-- Botón Admin con ID para ocultarlo automáticamente en GitHub Pages -->
+        <button id="admin-btn" onclick="toggleAdminModal()" class="text-xs bg-white text-brand-darkRose font-bold px-2.5 py-1 rounded-full shadow hover:bg-rose-100 transition flex items-center gap-1">
             <i class="fa-solid fa-gear"></i> <span class="hidden sm:inline">Modo Admin / Precios</span>
         </button>
     </div>
@@ -614,6 +615,14 @@
 
         // Initialize App
         window.onload = function() {
+            // Ocultar automáticamente el botón de admin si está subido a GitHub Pages
+            if (window.location.hostname.includes('github.io')) {
+                const adminBtn = document.getElementById('admin-btn');
+                if (adminBtn) {
+                    adminBtn.style.display = 'none';
+                }
+            }
+
             loadProductsFromStorage();
             renderProducts();
             initPoteBuilder();
